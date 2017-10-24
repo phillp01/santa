@@ -1,0 +1,400 @@
+{% extends "shop/base.html" %}
+{% load staticfiles %}
+{% block page_content %}
+	<body class="order">
+		<!-- header section -->
+		<div class="contact_section">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<img src="{% static 'images/logo.png' %}" class="logo">
+					</div>
+					<div class="col-sm-12 menu">
+						{% include "includes/nav.html" %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ header section /-->
+		<!--order section -->
+		<div class="detail_sec">
+			<div class="container">
+				<form id="order_form" name="order_form" class="" method="post" enctype="multipart/form-data" action=".">
+					<div class="border_sec">
+						<div class="border_dotted">
+							<div class="row">
+								<div class="col-sm-12 form_head">
+									<h2>Section 1: Sender Details</h2>
+									<p>Please provide your contact details below and we will keep you up to date at each stage of your letter production.</p>
+									<div class="border_btm"></div>
+								</div>
+								<div class="form_inner">
+									<div class="col-sm-6">
+										{{ form.subject.errors }}
+										<label>First Name<i class="red">*</i></label>
+										{{ form.first_name }}
+									</div>
+									<div class="col-sm-6">
+										<label>Last Name<i class="red">*</i></label>
+										{{ form.last_name }}
+									</div>
+									<div class="col-sm-6">
+										<label>Your Email Address<i class="red">*</i></label>
+										{{ form.email }}
+									</div>
+									<div class="col-sm-6">
+										<label>Confirm Email Address<i class="red">*</i></label>
+										<input type="text" class="txt" placeholder="" name="sender_confirm_email_address" id="sender_confirm_email_address">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- section 2 -->
+					<div class="border_sec part_2">
+						<div class="border_dotted">
+							<div class="row">
+								<div class="col-sm-12 form_head">
+									<h2>Section 2: Recipient Child's details</h2>
+									<div class="border_btm"></div>
+								</div>
+								<div class="form_inner">
+									<div class="col-sm-6"><label>First Name<i class="red">*</i></label>
+										{{ form.child_first_name }}
+								</div>
+								<div class="col-sm-6">
+									<label>Last Name<i class="red">*</i></label>
+										{{ form.child_last_name}}
+								</div>
+								<div class="col-sm-6">
+									<label>Are they a boy or girl<i class="red">*</i></label>
+									{{ form.child_boy_girl }}
+								</div>
+								<div class="col-sm-6">
+									<label>How old will they be on Christmas Day?<i class="red">*</i></label>
+									{{ form.child_age }}{{ form.child_age_time }}							
+								</div>
+								<div class="col-sm-6">
+									<label>Date of Birth<i class="red">*</i></label>
+									{{ form.child_birth_year }}
+								</div>
+								<div class="col-sm-6 no_lab">
+									<label class="height"></label>
+									{{ form.child_birth_month }}
+									{{ form.child_birth_day }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/ section 2 /-->
+				<!-- section 3 -->
+				<div class="border_sec part_2">
+					<div class="border_dotted">
+						<div class="row">
+							<div class="col-sm-12 form_head">
+								<h2>Section 3: Recipient Child's address</h2>
+								<div class="border_btm"></div>
+							</div>
+							<div class="form_inner">
+								<div class="col-sm-6"><label>Home Address 1<i class="red">*</i></label>
+								{{ form.child_address }}
+							</div>
+							<div class="col-sm-6">
+								<label>Home Address 2</label>
+								{{ form.child_address2 }}
+							</div>
+							<div class="col-sm-6">
+								<label>Home Address 3</label>
+								{{ form.child_address3 }}
+							</div>
+							<div class="col-sm-6">
+								<label>Town/City<i class="red">*</i></label>
+								{{ form.child_city}}
+							</div>
+							<div class="col-sm-6">
+								<label>Postcode<i class="red">*</i></label>
+								{{ form.child_postal_code }}
+							</div>
+							<div class="col-sm-6">
+								<label>Country<i class="red">*</i></label>
+								{{ form.child_country }}
+							<div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ section 3 /-->
+			<!-- section 4 -->
+			<div class="border_sec part_2">
+				<div class="border_dotted">
+					<div class="row">
+						<div class="col-sm-12 form_head">
+							<h2>Section 4: friends and family</h2>
+							<p>So we can fully personalise your letter please include a relative's name and friend's name which is included in your letter. </p>
+							<div class="border_btm"></div>
+						</div>
+						<div class="form_inner">
+							<div class="col-sm-6"><label>Relative's name (e.g. Mummy and Daddy)<i class="red">*</i></label>
+							{{ form.child_relative_name }}
+						</div>
+						<div class="col-sm-6">
+							<label>Friend's Name<i class="red">*</i></label>
+							{{ form.child_friend_name }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ section 4 /-->
+		<!-- section 5 -->
+		<div class="border_sec part_2">
+			<div class="border_dotted">
+				<div class="row">
+					<div class="col-sm-12 form_head">
+						<h2>Section 5: Gifts & Achievements</h2>
+						<p>To give your child a truly authentic letter, please give us a little more information to include in the letter. </p>
+						<div class="border_btm"></div>
+					</div>
+					<div class="form_inner">
+						<div class="col-sm-6"><label>Desired Present<i class="red">*</i></label>
+						{{ form.child_present }}
+					</div>
+					<div class="col-sm-6">
+						<label>What have they achieved this year<i class="red">*</i></label>
+						{{ form.child_achievement }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ section 5 /-->
+	<!-- section 6 -->
+	<div class="border_sec part_2">
+		<div class="border_dotted">
+			<div class="row">
+				<div class="col-sm-12 form_head">
+					<h2>Section 6: Letter Design</h2>
+					<p>Select the letter design for your child. Each and every letter contains a different story so you can pick and choose what works for you. Once selected you can see a live preview of your completed letter on the next stage. However, if you would like to preview all the letter designs then click here.  </p>
+					<div class="design_btn">
+						<!--
+							<div class="col-sm-6"><a href="#">View all design</a></div>
+							<div class="col-sm-6 text-right"><a href="#">View baby’s 1st letter design</a></div>
+						-->
+					</div>
+				</div>
+				<div class="form_inner">
+					<div class="border_top"></div>
+					{% for choice in form.letter_design.field.choices %}
+						<div class="col-sm-4 mb_20">
+							<input class="regular-radio" name='{{ form.letter_design.name }}' 
+						    id='radio-1-{{ forloop.counter0|add:1 }}' type='radio' value='{{ choice.0 }}'
+						    {% if not form.is_bound %}{% ifequal form.letter_design.field.initial choice.0 %} checked='checked' {% endifequal %}
+						   	{% else %}{% ifequal form.letter_design.data choice.0 %} checked='checked' {% endifequal %}{% endif %}/>
+						   	<label for="radio-1-{{forloop.counter0|add:1}}"></label>
+							<img src="/static/images/letter{{forloop.counter0|add:1}}.jpg">  
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- section 6 -->
+	<!-- section 7 -->
+	<div class="border_sec part_2">
+		<div class="border_dotted">
+			<div class="row">
+				<div class="col-sm-12 form_head">
+					<h2>Section 7: When would you like us to post your letter?</h2>
+					<p>Please choose the date that you would like us to post your letter and you will then be shown the expected delivery date. Note: This is only for letters that are physically posted out, our digital versions should be received within 48 hours of purchase.  </p>
+					<div class="border_btm"></div>
+				</div>
+				<div class="form_inner">
+					<div class="col-sm-6">
+						{{ form.delivery_date }}
+						<label class="labl_2">Your letter is estimated to be delivered on Friday 10 Nov 2017</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ section 7 /-->
+	<!-- section 8 -->
+	<div class="border_sec part_2">
+		<div class="border_dotted">
+			<div class="row">
+				<div class="col-sm-12 form_head">
+					<h2>Section 8: Delivery Method</h2>
+					<p>You can decide how would you like to have this letter delivered to the child? We can send it to you through the post, as a digital PDF download or you could have both formats.</p>
+					<div class="border_btm"></div>
+				</div>
+				<div class="form_inner">
+					<div class="col-sm-6">
+						<select class="txt slct3" name="delivery_method" id="delivery_method" onchange="display_delivery();">
+							<option value="post">Post</option>
+							<option value="download">Digital Download PDF</option>
+							<option value="both">Both (Post & Digital Download PDF)</option>
+						</select>
+						<label class="labl_2">Your letter is estimated to be delivered on Friday 10 Nov 2017</label>
+					</div>
+					<div class="col-sm-6"></div>
+					<div class="bg_sec">
+						<div class="bg_sec_inner post_area">
+							<h3>Would you also like to receive this letter as a Digital Download PDF too? <br/>
+							For the special price of $0.99.</h3>
+							<div class="add_order">{{ form.pdf_download }}
+								<label for="checkbox-2" class="checkbox-custom-label"></label>
+								<p>Yes please, add this to my order</p>
+							</div>
+						</div>
+					<div class="bg_sec_inner download_area" style="display:none;">
+						<h3>Would you also like to receive this letter through the post in a festive envelope?  <br/>
+						For the special price of $4.49.</h3>
+						<div class="add_order"><input id="checkbox-2" class="checkbox-custom" name="checkbox-2" type="checkbox">
+						<label for="checkbox-2" class="checkbox-custom-label"></label>
+						<p>Yes please, add this to my order</p></label>
+					</div>
+					
+				</div>
+				<ul class="price_list">
+					<li>Letter Price: <span class="red">$8.49</span></li>
+					<li>Delivery: <span class="red">Free</span></li>
+					<li>Total: <span class="red">$8.49</span></li>
+				</ul>
+				<div class="border_top"></div>
+				<div class="design_btn btn_2">
+					<div class="col-sm-12"><h2 class="fynl">Finally</h2></div>
+					<div class="col-sm-6"><div class="add_order">
+						{{ form.agree_terms }}
+						<label for="checkbox-3" class="checkbox-custom-label"></label>
+						<p class="p2">I have read and agree to the Terms and Conditions</p>
+					</div></div>
+					<div class="col-sm-6 text-right">
+						<button type="submit" class="preview-order order-preview">Preview and order my letter</button>
+						<!--<a href="preview-order.html" class="preview-order">Preview and order my letter</a>-->
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="add_order">
+						<p class="full_para">Note: Please make sure that you fill in the details carefully as we do not check the spelling and grammar on each and every
+						letter we send out.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!--/ section 8 /-->
+{% csrf_token %}
+</form>
+</div>
+</div>
+<!--/ order section /-->
+<!-- footer section -->
+<footer>
+{% include "includes/footer.html" %}
+</footer>
+<!--/ footer section /-->
+{% include "includes/bottom-js.html" %}
+<script type="text/javascript">}
+(function($,W,D)
+{
+var JQUERY4U = {};
+JQUERY4U.UTIL =
+{
+setupFormValidation: function()
+{
+$("#order_form").validate({
+rules: {
+sender_first_name: "required",
+sender_last_name: "required",
+sender_confirm_email_address: "required",
+sender_email_address: {
+required: true,
+email: true
+},
+sender_confirm_email_address: {
+required: true,
+email: true,
+equalTo: "#sender_email_address"
+},
+recipient_first_name: "required",
+recipient_last_name: "required",
+recipient_gender: "required",
+recipient_age: "required",
+recipient_age_year: "required",
+recipient_date_of_birth: "required",
+recipient_birth_month: "required",
+recipient_birth_day: "required",
+recipient_home_address: "required",
+recipient_postcode: {
+required: true,
+number: true
+},
+recipient_country: "required",
+relative_name: "required",
+relative_friend: "required",
+desired_present: "required",
+achievement: "required",
+post_month: "required",
+delivery_method: "required",
+recipient_city: "required",
+},
+messages: {
+sender_first_name: "Please enter first name.",
+recipient_first_name: "Please enter first name.",
+sender_last_name: "Please enter  last name.",
+recipient_last_name: "Please enter  last name.",
+sender_email_address:{ required:"Please enter  email.",
+email :"Invalid email"},
+sender_confirm_email_address:{
+required:"Please confirm enter email.",
+email :"Invalid email",
+equalTo: "Please enter the same email as above"
+	},
+	
+recipient_gender: "Please select gender.",
+recipient_age_year: "Please select year.",
+recipient_date_of_birth: "Please select date of birth.",
+recipient_birth_month: "Please select date of birth month.",
+recipient_birth_day: "Please select date of birth day.",
+recipient_age: "Please enter age.",
+recipient_home_address: "Please enter home address 1.",
+recipient_postcode: {
+required: "Please enter postcode.",
+number: "Please enter only Digits."
+},
+relative_name: "Please enter relative name.",
+relative_friend: "Please enter relative frield.",
+desired_present: "Please enter desired present.",
+achievement: "Please enter achievement.",
+recipient_country: "Please select country.",
+post_month: "Please post letters.",
+delivery_method: "Please select delivery method.",
+recipient_city: "Please enter city.",
+},
+});
+}
+}
+$(D).ready(function($) {
+JQUERY4U.UTIL.setupFormValidation();
+});
+})(jQuery, window, document);
+function display_delivery(id){
+var val = $("#delivery_method").val();
+if(val=="post"){
+$(".post_area").show();
+$(".download_area").hide();
+}
+if(val=="download"){
+$(".post_area").hide();
+$(".download_area").show();
+}
+if(val=="both"){
+$(".post_area").hide();
+$(".download_area").hide();
+}
+}
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+		<META NAME="robots" CONTENT="noindex,nofollow">
+
+		<META NAME="robots" CONTENT="noindex">
+		<META NAME="robots" CONTENT="nofollow">
+
+		<title>SANTA</title>
+
+		<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+
+		<!--<link rel="stylesheet" href="{% static 'css/style.css?v=401.6' %}" type="text/css" media="screen">-->
+    	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen">
+		<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+
+		<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<!--<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.css?v=2.1.5' %}" media="screen" />-->
+      	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.css' %}" media="screen" />
+	</head>
+{% block body %}<body>{% endblock %}
+	{% block page_content %}
+	{% endblock %}
+</body>
+</html>
