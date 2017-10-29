@@ -1,0 +1,125 @@
+{% extends "shop/base.html" %}
+{% load staticfiles %}
+{% block page_content %}
+    <!-- header section -->
+    <div class="cart_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <img src="{% static 'images/logo.png' %}" class="logo">
+                </div>
+                <div class="col-sm-12 menu">
+                    {% include "includes/nav.html" %}
+                </div>
+                <div class="col-sm-8 banner_txt">
+                    <div class="quot">
+                        <h2>He has been super excited ever since he received the letter, and even put the letter in a protective sleeve...Joseph has been on the fence about believing and <b>this letter will give us one more memorable year</b> as parents. Thank you so much and have an amazing Christmas.</h2>
+                        <h3>- Amanda M. Chicago</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ header section /-->
+    <!-- form section -->
+    <div class="cart_sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="tabl_main">
+                        <table class="table" id="cart_table">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">Shopping cart</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="red">ITEMS</td>
+                                    <td></td>
+                                    <td class="red">Price</td>
+                                    <td></td>
+                                </tr>
+                                {% for item in cart %}
+                                    {% with product=item.product %}
+                                <tr>
+                                    <td colspan="2">{{ item.name }} for Hussain</td>
+                                    <td>$4.95</td>
+                                    <td><a href="javascript:void(0)" class="remove">Remove</a></td>
+                                </tr>
+                                <tr>
+                                    {% endwith %}
+                                {% endfor %}
+                                    <td colspan="2">
+                                    Postcard Reminder to be Good (ELF Skool) for Z</td>
+                                    <td>$4.95</td>
+                                    <td><a href="javascript:void(0)" class="remove">Remove</a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><div class="divide"></div></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-right">Item Total:</td>
+                                    <td>$9.90</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-right">Shipping & Processing:</td>
+                                    <td>$9.90</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="totl text-right">Total:</td>
+                                    <td class="totl">$9.90</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><div class="divide"></div></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><div class="btn_chck"><a href="index.html" class="chckout">Add another recipient</a><a href="payment.html" class="chckout">checkout Now</a></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ form section /-->
+        <!-- footer section -->
+        <footer>
+            {% include "includes/footer.html" %}
+        </footer>
+        <!--/ footer section /-->
+        {% include "includes/bottom-js.html" %}
+        <script>
+        $('.sponsor').owlCarousel({
+        loop: true,
+        margin: 60,
+        responsiveClass: true,
+        autoplay: true,
+        autoplayTimeout: 4000,
+        smartSpeed: 1000,
+                responsiveClass:true,
+                pagination: true,
+        center: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right" ></i>'],
+        responsive: {
+        0: {
+        items: 1,
+        margin: 0,
+        },
+        768: {
+        items: 1,
+        margin: 0,
+        },
+        1200: {
+        items: 1
+        }
+        }
+        });
+        </script>
+    {% endblock %}

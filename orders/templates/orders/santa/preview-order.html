@@ -1,313 +1,158 @@
-{% extends "base.html" %}
+{% extends "shop/base.html" %}
 {% load staticfiles %}
 {% block page_content %}
-<!doctype html>
+    <!doctype html>
+    {% block body %}<body class="letter_prev">{% endblock %}
+    <!-- header section -->
+    <div class="contact_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <img src="{% static 'images/logo.png' %}" class="logo">
+                </div>
+                <div class="col-sm-12 menu">
+                    {% include "includes/nav.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ header section /-->
+    <!-- letter section -->
+    <div class="letter_sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="letter_inner">
+                        <div class="letter_head">
+                            <h1>Nearly there, next step is to just confirm we have everything correct</h1>
+                            <p>Please check your order details bellow and once you are happy then click on choose your payment option to complete your order.</p>
+                        </div>
+                        <div class="border_sec">
+                            <div class="border_dotted">
+                                <div class="row">
+                                    <div class="form_inner">
+                                        <div class="col-sm-12">
+                                            <h2>Your Personalized Letter Preview</h2>
+                                            <p>Please take a look at your letter preview bellow. If you would like to change anything then <a href="order-detail.html" class="follow">Edit Your Details</a></p></div>
+                                            <div class="col-sm-12">
+                                                <div class="in_letter">
+                                                    <ul class="adr_list">
+                                                        <li>{{ order.child_address }}</li>
+                                                        {% if order.child_address2 %}
+                                                            {{ order.child_address2 }}
+                                                        {% endif %}
+                                                        {% if order.child_address3 %}
+                                                            {{ order.child_address3 }}
+                                                        {% endif %}
 
-{% block body %}<body class="letter_prev">{% endblock %}
+                                                        <li>{{ order.child_town }}</li>
+                                                        <li>{{ order.child_postal_code }}</li>
+                                                        <li>{{ order.child_country }}</li>
+                                                    </ul>
+                                                    <p>Dear <span style="font-weight: bolder">{{ order.child_first_name }}</span>,
+                                                    </p>
+                                                    <p> It’s incredible to think that Christmas is upon us again. The elves are busy tinkering away in their workshops to prepare all the toys for all the children of the world, including you and your dear friend <span style="font-weight: bolder">{{ order.child_friend_name }}</span>. Don’t worry though, we won’t forget about Mommy and Daddy either. A special treat is reserved just for them. Mrs. Claus just has to get around to doing the gift-wrapping.
+                                                    </p><p>
+                                                    Mrs. Claus does love animals, and so as Christmas time approaches she takes extra special care of the reindeers, making sure that they get lots of carrots to keep them well-fed and gives them long walks through the forest around our home to make sure that they’re fit and ready to drop off toys to you all. Don’t worry, the reindeers started their exercise extra early this year so they’ll be whooshing across the twinkling skies of <span style="font-weight: bolder">{{ order.child_city }}</span> on Christmas Eve and if you continue to be good we will hopefully be delivering your lovely presents.
+                                                </p><p>
+                                                Mrs. Claus and the elves send their love. We can’t tell you how delighted we were when we heard from the Head Elf that you are on the nice list again this year. Although, to be honest we weren’t surprised as you are growing into a wonderful and kind <span style="font-weight: bolder">{{ orders.child_boy_girl }}</span>. As you’ve grown in size you’ve grown in wisdom, and I bet your Mommy and Daddy were as pleased as us when you been very good at school and at just <span style="font-weight: bolder">{{ order.child_age }} {{ order.child_age_time }}</span> old too!
+                                            </p><p>
+                                            Sadly, I shall have to say goodbye as the reindeers are getting a little too attached to our Christmas tree decorations for my liking. They ate some of them last year and had a terrible tummy ache for days.
+                                        </p>
+                                        <p>Farewell from the North Pole.</p>
+                                    </div>
+                                    <p class="last_para">Done something wrong? If so <a href="order-detail.html" class="follow">Make Changes, follow the link</a></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 del_sec">
+                    <h2>Delivery Date</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et blandit purus, pharetra tempus mi. Suspendisse potenti. Aliquam sed neque lacus. In quis pretium orci, quis vehicula mauris. </p>
+                    <p class="brdr"></p>
+                </div>
+                <div class="col-sm-12 del_sec2">
+                    <h2>Your chosen letter design</h2>
+                    <p class="letr_img"><img src="{% static 'images/letter' %}{{ order.letter_design }}.jpg"></p>
+                </div>
+                <div class="col-sm-12 del_sec2">
+                    <h2>Your Details</h2>
+                    <p class="brdr2"></p>
+                    <ul class="yr_detail">
+                        <li><strong>First Name:</strong> {{ order.first_name }}</li>
+                        <li><strong>Last Name:</strong> {{ order.last_name }}</li>
+                        <li><strong>Your Email Address:</strong> {{ order.email }}</li>
+                        <li><strong>Your Mobile Number:</strong></li>
+                    </ul>
+                </div>
+                <!--
+                <div class="col-sm-12 del_sec2">
+                    <h2>Promotional code</h2>
+                    <p class="brdr2"></p>
+                    <ul class="yr_detail">
+                        <li style="text-transform:uppercase">Weekend</li>
+                    </ul>
+                </div>-->
+                <div class="col-sm-12 del_sec2">
+                    <h2>Delivery</h2>
+                    <p class="brdr2"></p>
+                    <ul class="yr_detail">
+                        <li><strong>Method:</strong>{% if order.pdf_download == 1 %} Post & Digital Download (PDF){% else %} Post Only{% endif %}</li>
+                        {% for item in cart %}
+                            {% with product=item.product %}
+                        <li><strong>Item:</strong> {{ item.name }} - £{{ item.price }}</li>
+                            {% endwith %}
+                        {% endfor %}
 
-<!-- header section -->
-
-<div class="contact_section">
-
-<div class="container">
-
-<div class="row">
-
-<div class="col-sm-12 text-center">
-
-<img src="{% static 'images/logo.png' %}" class="logo">
-
-
+                        <li><strong>Delivery:</strong> FREE</li>
+                        <li><strong>Total:</strong> £{{ cart.get_total_price }}</li>                        
+                    </ul>
+                </div>
+                <div class="col-sm-12 del_sec2">
+                    <p>Or, if you like to make some changes then <a href="order-detail.html" class="follow">follow the link</a></p>
+                </div>
+                <div class="col-sm-12 text-left">
+                    <a href="{% url 'cart:shopping_cart' %}" class="nxt_stp btn_nxt btn-for-mob">Order Now!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="col-sm-12 menu">
-
-  {% include "includes/nav.html" %}
-
 </div>
-
-
-
-</div>
-
-</div>
-
-</div>
-
-<!--/ header section /-->
-
-<!-- letter section -->
-
-<div class="letter_sec">
-
-<div class="container">
-
-<div class="row">
-
-<div class="col-sm-12">
-
-<div class="letter_inner">
-
-
-
-<div class="letter_head">
-
-<h1>Nearly there, next step is to just confirm we have everything correct</h1>
-
-<p>Please check your order details bellow and once you are happy then click on choose your payment option to complete your order.</p>
-
-</div>
-
-<div class="border_sec">
-
-
-
-<div class="border_dotted">
-
-<div class="row">
-
-<div class="form_inner">
-
-<div class="col-sm-12">
-
-<h2>Your Personalized Letter Preview</h2>
-
-<p>Please take a look at your letter preview bellow. If you would like to change anything then <a href="order-detail.html" class="follow">Edit Your Details</a></p></div>
-
-<div class="col-sm-12">
-
-<div class="in_letter">
-
-<ul class="adr_list">
-
-<li>4 Lodge Close</li>
-
-<li>Halesowen</li>
-
-<li>b62 0bg</li>
-
-<li>UK</li>
-
-</ul>
-
-<p>Dear Oliver,
-
-</p>
-
-<p> It’s incredible to think that Christmas is upon us again. The elves are busy tinkering away in their workshops to prepare all the toys for all the children of the world, including you and your dear friend Finley. Don’t worry though, we won’t forget about Mommy and Daddy either. A special treat is reserved just for them. Mrs. Claus just has to get around to doing the gift-wrapping.
-
-</p><p>
-
-Mrs. Claus does love animals, and so as Christmas time approaches she takes extra special care of the reindeers, making sure that they get lots of carrots to keep them well-fed and gives them long walks through the forest around our home to make sure that they’re fit and ready to drop off toys to you all. Don’t worry, the reindeers started their exercise extra early this year so they’ll be whooshing across the twinkling skies of Halesowen on Christmas Eve and if you continue to be good we will hopefully be delivering your lovely presents. 
-
-</p><p>
-
-Mrs. Claus and the elves send their love. We can’t tell you how delighted we were when we heard from the Head Elf that you are on the nice list again this year. Although, to be honest we weren’t surprised as you are growing into a wonderful and kind boy. As you’ve grown in size you’ve grown in wisdom, and I bet your Mommy and Daddy were as pleased as us when you been very good at school and at just 8 years old too! 
-
-</p><p>
-
-Sadly, I shall have to say goodbye as the reindeers are getting a little too attached to our Christmas tree decorations for my liking. They ate some of them last year and had a terrible tummy ache for days.
-
-</p>
-
-<p>Farewell from the North Pole.</p>
-
-</div>
-
-<p class="last_para">Done something wrong? If so <a href="order-detail.html" class="follow">Make Changes, follow the link</a></p>
-
-</div>
-
-
-
-	 
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="col-sm-12 del_sec">
-
-<h2>Delivery Date</h2>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et blandit purus, pharetra tempus mi. Suspendisse potenti. Aliquam sed neque lacus. In quis pretium orci, quis vehicula mauris. </p>
-
-<p class="brdr"></p>
-
-
-
-</div>
-
-<div class="col-sm-12 del_sec2">
-
-<h2>Your chosen letter design</h2>
-
-<p class="letr_img"><img src="{% static 'images/letter2.jpg' %}"></p>
-
-</div>
-
-<div class="col-sm-12 del_sec2">
-
-<h2>Your Details</h2>
-
-<p class="brdr2"></p>
-
-<ul class="yr_detail">
-
-<li><strong>First Name:</strong> Nick</li>
-
-<li><strong>Last Name:</strong> Ellsore</li>
-
-<li><strong>Your Email Address:</strong> nick@gmail.com</li>
-
-<li><strong>Your Mobile Number:</strong> 07805050568</li>
-
-</ul>
-
-</div>
-
-<!--
-
-<div class="col-sm-12 del_sec2">
-
-<h2>Promotional code</h2>
-
-<p class="brdr2"></p>
-
-<ul class="yr_detail">
-
-<li style="text-transform:uppercase">Weekend</li>
-
-</ul>
-
-</div>-->
-
-<div class="col-sm-12 del_sec2">
-
-<h2>Delivery</h2>
-
-<p class="brdr2"></p>
-
-<ul class="yr_detail">
-
-<li>Post & Digital Download (PDF)</li>
-
-<li><strong>Letter Price:</strong> $8.49</li>
-
-<li><strong>Delivery:</strong> FREE</li>
-
-<li><strong>Total:</strong> $8.49</li>
-
-</ul>
-
-</div>
-
-<div class="col-sm-12 del_sec2">
-
-<p>Or, if you like to make some changes then <a href="order-detail.html" class="follow">follow the link</a></p>
-
-</div>
-
-<div class="col-sm-12 text-left">
-
-<a href="shopping-cart.html" class="nxt_stp btn_nxt btn-for-mob">Order Now!</a></p>
-
-</div>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-
-
 <!--/ letter section /-->
-
-
-
-
-
-
-
 <!-- footer section -->
-
 <footer>
-
-  {% include "includes/footer.html" %}
-
+{% include "includes/footer.html" %}
 </footer>
-
 <!--/ footer section /-->
-
 {% include "includes/bottom-js.html" %}
-
 <script>
-
 $('.sponsor').owlCarousel({
-
-        loop: true,
-
-        margin: 60,
-
-        responsiveClass: true,
-
-        autoplay: true,
-
-        autoplayTimeout: 4000,
-
-        smartSpeed: 1000,
-
-		 responsiveClass:true,
-
-		 pagination: true,
-
-        center: true,
-
-        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right" ></i>'],
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-                margin: 0,
-
-            },
-
-            768: {
-
-                items: 1,
-
-                margin: 0,
-
-            },
-
-            1200: {
-
-                items: 1
-
-            }
-
-        }
-
-    });
-
+loop: true,
+margin: 60,
+responsiveClass: true,
+autoplay: true,
+autoplayTimeout: 4000,
+smartSpeed: 1000,
+        responsiveClass:true,
+        pagination: true,
+center: true,
+navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right" ></i>'],
+responsive: {
+0: {
+items: 1,
+margin: 0,
+},
+768: {
+items: 1,
+margin: 0,
+},
+1200: {
+items: 1
+}
+}
+});
 </script>
-
 {% endblock %}

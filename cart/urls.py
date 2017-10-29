@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.cart_detail, name='cart_detail'),
+    url(r'^shopping-cart/', views.cart_detail, name='shopping_cart'),
     url(r'^add/(?P<product_id>\d+)/$',
         views.cart_add,
         name='cart_add'),

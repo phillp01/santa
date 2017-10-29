@@ -21,7 +21,7 @@ class Order(models.Model):
     child_postal_code = models.CharField(max_length=20)
     child_city = models.CharField(max_length=100)
     
-    COUNTRY_CHOICES = (('option 1','UK'),('option 2','USA'),)
+    COUNTRY_CHOICES = (('UK','UK'),('USA','USA'),)
     child_country = models.CharField(max_length=10, choices=COUNTRY_CHOICES, default='UK')    
     
     SEX_CHOICES = (('M','Boy'),('F','Girl'),)
@@ -36,7 +36,7 @@ class Order(models.Model):
     DAY_CHOICES = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),('11','11'),('12','12'),('13','13'),('14','14'),('15','15'),('16','16'),('17','17'),('18','18'),('19','19'),('20','20'),('21','21'),('22','22'),('23','23'),('24','24'),('25','25'),('26','26'),('27','27'),('28','28'),('29','29'),('30','30'),('31','31'))
     child_birth_day = models.CharField(max_length=10, choices=DAY_CHOICES, default=1)    
 
-    AGE_TIME_CHOICES = (('YS','Years'),('Y','Year'),('MS','Months'),('M','Month'),('D','Days'),)
+    AGE_TIME_CHOICES = (('Years','Years'),('Year','Year'),('Month','Months'),('Month','Month'),('Days','Days'),)
     child_age_time = models.CharField(max_length=10, choices=AGE_TIME_CHOICES, default='Years')    
 
     child_relative_name = models.CharField(max_length=50)
@@ -75,7 +75,7 @@ class OrderItem(models.Model):
                                 related_name='order_items')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
-
+    name = models.CharField(max_length=200, db_index=True)
     def __str__(self):
         return '{}'.format(self.id)
 
