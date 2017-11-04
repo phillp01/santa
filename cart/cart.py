@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
+import random, string
 
 class Cart(object):
 
@@ -15,23 +16,34 @@ class Cart(object):
 			cart = self.session[settings.CART_SESSION_ID] = {}
 		self.cart = cart
 
-	def add(self, product, quantity=1, update_quantity=False):
+	def add(self, product, ref='a', quantity=1, update_quantity=False):
 		"""
 		Add a product to the cart or update its quantity.
 		"""
-		product_id = str(product.id)
-		if product_id not in self.cart:
-			
-			#print("Product ID is not in self.cart")
-			
-			self.cart[product_id] = {'quantity': 0,
-									  'price': str(product.price),
-									  'name': str(product.name),}
-		if update_quantity:
-			self.cart[product_id]['quantity'] = quantity
+
+		#print ("Add cart Order = ",order.child_first_name)
 		
-		elif self.cart[product_id]['quantity'] < 1:
-			self.cart[product_id]['quantity'] += quantity
+		product_id = str(product.id)
+		
+		if ref =='a':
+
+			random_ref = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
+			
+			self.session['ref'] = str(random_ref)
+				
+				#print("Product ID is not in self.cart")
+				
+			self.cart[product_id] = {'quantity': 1,
+									 'price': str(product.price),
+									 'name': str(product.name),
+									 'ref':str(random_ref),
+			}
+		else:
+			self.cart[product_id] = {'quantity': 1,
+									 'price': str(product.price),
+									 'name': str(product.name),
+									 'ref':str(ref),
+			}
 
 		str(self.cart[product_id]['quantity'])
 		#print ("Quantity = %s" % self.cart[product_id]['quantity'])

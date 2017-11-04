@@ -43,18 +43,12 @@
                                 {% for item in cart %}
                                     {% with product=item.product %}
                                 <tr>
-                                    <td colspan="2">{{ item.name }} for Hussain</td>
-                                    <td>$4.95</td>
+                                    <td colspan="2">{{ item.name }} {% if item.child_first_name %}for{% endif %} {{ item.child_first_name}}</td>
+                                    <td>£{{ item.price }}</td>
                                     <td><a href="javascript:void(0)" class="remove">Remove</a></td>
                                 </tr>
-                                <tr>
                                     {% endwith %}
                                 {% endfor %}
-                                    <td colspan="2">
-                                    Postcard Reminder to be Good (ELF Skool) for Z</td>
-                                    <td>$4.95</td>
-                                    <td><a href="javascript:void(0)" class="remove">Remove</a></td>
-                                </tr>
                                 <tr>
                                     <td colspan="4"><div class="divide"></div></td>
                                 </tr>

@@ -24,6 +24,7 @@
                 <div class="col-sm-12">
                     <div class="letter_inner">
                         <div class="letter_head">
+                            {{order.ref.as_hidden}}
                             <h1>Nearly there, next step is to just confirm we have everything correct</h1>
                             <p>Please check your order details bellow and once you are happy then click on choose your payment option to complete your order.</p>
                         </div>
@@ -33,7 +34,7 @@
                                     <div class="form_inner">
                                         <div class="col-sm-12">
                                             <h2>Your Personalized Letter Preview</h2>
-                                            <p>Please take a look at your letter preview bellow. If you would like to change anything then <a href="order-detail.html" class="follow">Edit Your Details</a></p></div>
+                                            <p>Please take a look at your letter preview bellow. If you would like to change anything then <a href="{% url 'orders:order_update' ref=order.ref %}" class="follow">Edit Your Details</a></p></div>
                                             <div class="col-sm-12">
                                                 <div class="in_letter">
                                                     <ul class="adr_list">
@@ -61,7 +62,7 @@
                                         </p>
                                         <p>Farewell from the North Pole.</p>
                                     </div>
-                                    <p class="last_para">Done something wrong? If so <a href="order-detail.html" class="follow">Make Changes, follow the link</a></p>
+                                    <p class="last_para">Done something wrong? If so <a href="{% url 'orders:order_update' ref=order.ref %}" class="follow">Make Changes, follow the link</a></p>
                                 </div>
                                 
                             </div>
@@ -111,7 +112,7 @@
                     </ul>
                 </div>
                 <div class="col-sm-12 del_sec2">
-                    <p>Or, if you like to make some changes then <a href="order-detail.html" class="follow">follow the link</a></p>
+                    <p>Or, if you like to make some changes then <a href="{% url 'orders:order_update' ref=order.ref %}" class="follow">follow the link</a></p>
                 </div>
                 <div class="col-sm-12 text-left">
                     <a href="{% url 'cart:shopping_cart' %}" class="nxt_stp btn_nxt btn-for-mob">Order Now!</a></p>

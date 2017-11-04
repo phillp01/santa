@@ -4,7 +4,7 @@ from .models import Order
 class OrderCreateForm(forms.ModelForm):
 	class Meta:
 		model = Order
-		fields = [
+		fields = ['ref',
 				'first_name','last_name','email',
 				'child_first_name','child_last_name', 'child_boy_girl',
 				'child_age','child_age_time','child_birth_year','child_birth_month','child_birth_day',
@@ -13,10 +13,11 @@ class OrderCreateForm(forms.ModelForm):
 				'child_relative_name','child_friend_name',
 				'child_achievement','child_present',
 				'letter_design',
-				'delivery_date','pdf_download','agree_terms',
+				'pdf_download','agree_terms',
 		]
 		widgets = {
 					'letter_design' : forms.RadioSelect(),
+					'field_name' : forms.HiddenInput(),
 					#'last_name' : forms.TextInput(attrs={"class": 'txt'}),
 					#'email' : forms.TextInput(attrs={"class": 'txt'}),
 					#'child_first_name' : forms.TextInput(attrs={"class": 'txt'}),

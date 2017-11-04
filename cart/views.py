@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from shop.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
+from orders.models import Order, OrderItem
 
 @require_POST
 def cart_add(request, product_id):
@@ -29,5 +30,14 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
 	cart = Cart(request)
+
+	for item in cart:
+		if item.get('product') != 4:
+			result = Order.objects.filter(ref=item.get('ref'))
+			item['child_first_name'] = result[0].child_first_name
+
+	#for key, value in request.session.items():
+	#	print('{} => {} => {}'.format(key, value, type(value)))
+
 	#return render(request, 'cart/detail.html', {'cart': cart})
 	return render(request, 'santa/shopping-cart.html', {'cart': cart})

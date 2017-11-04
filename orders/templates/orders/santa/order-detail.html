@@ -19,11 +19,12 @@
 		<!--order section -->
 		<div class="detail_sec">
 			<div class="container">
-				<form id="order_form" name="order_form" class="" method="post" enctype="multipart/form-data" action=".">
+				<form id="order_form" name="order_form" class="" method="post" enctype="multipart/form-data" action="{% url 'orders:order_create' %}">
 					<div class="border_sec">
 						<div class="border_dotted">
 							<div class="row">
 								<div class="col-sm-12 form_head">
+									{{form.ref.as_hidden}}
 									<h2>Section 1: Sender Details</h2>
 									<p>Please provide your contact details below and we will keep you up to date at each stage of your letter production.</p>
 									<div class="border_btm"></div>

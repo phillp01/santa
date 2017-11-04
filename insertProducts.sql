@@ -1,6 +1,8 @@
 INSERT INTO `shop_category` (`id`, `name`, `slug`) VALUES (NULL, 'letter', 'letters');
 INSERT INTO `shop_category` (`id`, `name`, `slug`) VALUES (NULL, 'postcard', 'postcard');
+INSERT INTO `shop_category` (`id`, `name`, `slug`) VALUES (NULL, 'options', 'options');
 
 INSERT INTO `shop_product` (`id`, `name`, `slug`, `image`, `description`, `price`, `stock`, `available`, `created`, `updated`, `category_id`) VALUES (NULL, 'Magic Package', 'magic-packge', '', 'Deluxe Package Letter', '8.95', '10000', '1', '2017-10-24 17:38:30.000000', '2017-10-24 17:38:30.000000', '1');
 INSERT INTO `shop_product` (`id`, `name`, `slug`, `image`, `description`, `price`, `stock`, `available`, `created`, `updated`, `category_id`) VALUES (NULL, 'Deluxe Package', 'deluxe-packge', '', 'Deluxe Package Letter', '16.95', '10000', '1', '2017-10-24 17:38:30.000000', '2017-10-24 17:38:30.000000', '1');
 INSERT INTO `shop_product` (`id`, `name`, `slug`, `image`, `description`, `price`, `stock`, `available`, `created`, `updated`, `category_id`) VALUES (NULL, 'Super Deluxe Package', 'super-deluxe-packge', '', 'Deluxe Package Letter', '35.95', '10000', '1', '2017-10-24 17:38:30.000000', '2017-10-24 17:38:30.000000', '1');
+INSERT INTO `shop_product` (`id`, `name`, `slug`, `image`, `description`, `price`, `stock`, `available`, `created`, `updated`, `category_id`) VALUES (NULL, 'PDF Email Delivery', 'PDF-email-delivery', '', 'PDF Email Delivery', '0.99', '10000', '1', '2017-10-24 17:38:30.000000', '2017-10-24 17:38:30.000000', '3');
