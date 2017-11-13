@@ -23,6 +23,12 @@ class Cart(object):
 
 		#print ("Add cart Order = ",order.child_first_name)
 		
+		for item in self:
+			if item['product'] == 4 and item['ref'] == ref:
+				item["quantity"] = 1
+				self.save()
+
+
 		product_id = str(product.id)
 		
 		if ref =='a':
@@ -61,14 +67,20 @@ class Cart(object):
 		# mark the session as "modified" to make sure it is saved
 		self.session.modified = True
 
-	def remove(self, product):
+	def remove(self, product, ref='a'):
 		"""
 		Remove a product from the cart.
 		"""
 		product_id = str(product.id)
-		if product_id in self.cart:
-			del self.cart[product_id]
-			self.save()
+
+		for item in self:
+			if item['product'] == 4 and item['ref'] == ref:
+				item["quantity"] = 0
+				self.save()
+
+		#if product_id in self.cart:
+			#del self.cart[product_id]
+			
 
 	def __iter__(self):
 		"""

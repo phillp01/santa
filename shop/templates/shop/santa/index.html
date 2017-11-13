@@ -154,7 +154,7 @@
                 <img src="{% static 'images/2.png' %}" >
               </div>
               <p class="price">$8.95</p>
-              <form class ="order_outer" action="{% url 'cart:cart_add' 1 %}" method="post">
+              <form class ="order_outer" action="{% url 'orders:new_order' 1 %}" method="post">
                 {{ cart_product_form }}
                 {% csrf_token %}
                 <div class="order_btn"><input class="order_btn" type="submit" value="Order Now"></div>
@@ -172,7 +172,7 @@
                 <img src="{% static 'images/1.png' %}" >
               </div>
               <p class="price">$16.95</p>
-              <form class ="order_outer" action="{% url 'cart:cart_add' 3 %}" method="post">
+              <form class ="order_outer" action="{% url 'orders:new_order' 2 %}" method="post">
                 {{ cart_product_form }}
                 {% csrf_token %}
                 <div class="order_btn"><input class="order_btn" type="submit" value="Order Now"></div>
@@ -189,7 +189,7 @@
                 <img src="{% static 'images/3.png' %}" >
               </div>
               <p class="price">$35.95!</p>
-              <form class ="order_outer" action="{% url 'cart:cart_add' 3 %}" method="post">
+              <form class ="order_outer" action="{% url 'orders:new_order' 3 %}" method="post">
                 {{ cart_product_form }}
                 {% csrf_token %}
                 <div class="order_btn"><input class="order_btn" type="submit" value="Order Now"></div>

@@ -3,7 +3,11 @@ from .models import Category, Product
 from cart.forms import CartAddProductForm
 from cart.cart import Cart
 
-def product_list(request, category_slug=None):
+
+def product_list(request, additional=False, category_slug=None):
+	
+	request.session['additional'] = additional
+	print ("Is this an additional Letter :",request.session['additional'])
 	category = None
 	categories = Category.objects.all()
 	products = Product.objects.filter(available=True)
@@ -12,6 +16,7 @@ def product_list(request, category_slug=None):
 		products = products.filter(category=category)
 	cart = Cart(request)
 	cart.clear()
+
 	return render(request,
 				  #'shop/product/list.html',
 				  'shop/santa/index.html',

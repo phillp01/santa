@@ -34,25 +34,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="red">ITEMS</td>
-                                    <td></td>
-                                    <td class="red">Price</td>
-                                    <td></td>
-                                </tr>
-                                {% for item in cart %}
-                                    {% with product=item.product %}
-                                <tr>
-                                    <td colspan="2">{{ item.name }} {% if item.child_first_name %}for{% endif %} {{ item.child_first_name}}</td>
-                                    <td>£{{ item.price }}</td>
-                                    <td><a href="javascript:void(0)" class="remove">Remove</a></td>
-                                </tr>
-                                    {% endwith %}
-                                {% endfor %}
+                                {%if cart.count > 0 %}
+                                    <tr>
+                                        <td class="red">ITEMS</td>
+                                        <td></td>
+                                        <td class="red">Price</td>
+                                        <td></td>
+                                    </tr>
+                                              
+
+                                    {% for item in cart %}
+                                        {% with product=item.product %}
+                                    <tr>
+                                        <td colspan="2">{{ item.name }} {% if item.child_first_name %}for{% endif %} {{ item.child_first_name}}</td>
+                                        <td>£{{ item.total_price }}</td>
+                                        <td><a href="{% url 'orders:remove_item' item_id=item.id %}" class="remove">Remove</a></td>
+                                    </tr>
+                                        {% endwith %}
+                                    {% endfor %}
+                                {% else %}
+                                    <td colspan="4"><div class="divide"></div></td>
+                                    <tr>
+                                        <td colspan="2">You have no items in your cart</td>
+                                        <td><a href="{% url 'shop:add_recipient' additional='False' %}" class="remove">Send a Letter</a></td>
+                                    </tr>
+                                {% endif %}
                                 <tr>
                                     <td colspan="4"><div class="divide"></div></td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td></td>
                                     <td class="text-right">Item Total:</td>
                                     <td>$9.90</td>
@@ -63,18 +73,20 @@
                                     <td class="text-right">Shipping & Processing:</td>
                                     <td>$9.90</td>
                                     <td></td>
-                                </tr>
+                                </tr> -->
+                                {% if cart.count > 0 %}
+                                    <tr>
+                                        <td></td>
+                                        <td class="totl text-right">Total:</td>
+                                        <td class="totl">£{{cart_total}}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><div class="divide"></div></td>
+                                    </tr>
+                                {% endif %}
                                 <tr>
-                                    <td></td>
-                                    <td class="totl text-right">Total:</td>
-                                    <td class="totl">$9.90</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4"><div class="divide"></div></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4"><div class="btn_chck"><a href="index.html" class="chckout">Add another recipient</a><a href="payment.html" class="chckout">checkout Now</a></div></td>
+                                    <td colspan="4"><div class="btn_chck"><a href="{% url 'shop:add_recipient' additional='True' %}" class="chckout">Add another recipient</a><a href="{% url 'shop:add_recipient' additional='True' %}" class="chckout">checkout Now</a></div></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -24,7 +24,6 @@
                 <div class="col-sm-12">
                     <div class="letter_inner">
                         <div class="letter_head">
-                            {{order.ref.as_hidden}}
                             <h1>Nearly there, next step is to just confirm we have everything correct</h1>
                             <p>Please check your order details bellow and once you are happy then click on choose your payment option to complete your order.</p>
                         </div>
@@ -34,7 +33,7 @@
                                     <div class="form_inner">
                                         <div class="col-sm-12">
                                             <h2>Your Personalized Letter Preview</h2>
-                                            <p>Please take a look at your letter preview bellow. If you would like to change anything then <a href="{% url 'orders:order_update' ref=order.ref %}" class="follow">Edit Your Details</a></p></div>
+                                            <p>Please take a look at your letter preview bellow. If you would like to change anything then <a href="{% url 'orders:order_update' order=order.pk %}" class="follow">Edit Your Details</a></p></div>
                                             <div class="col-sm-12">
                                                 <div class="in_letter">
                                                     <ul class="adr_list">
@@ -62,7 +61,7 @@
                                         </p>
                                         <p>Farewell from the North Pole.</p>
                                     </div>
-                                    <p class="last_para">Done something wrong? If so <a href="{% url 'orders:order_update' ref=order.ref %}" class="follow">Make Changes, follow the link</a></p>
+                                    <p class="last_para">Done something wrong? If so <a href="{% url 'orders:order_update' order=order.pk %}" class="follow">Make Changes, follow the link</a></p>
                                 </div>
                                 
                             </div>
@@ -82,9 +81,9 @@
                     <h2>Your Details</h2>
                     <p class="brdr2"></p>
                     <ul class="yr_detail">
-                        <li><strong>First Name:</strong> {{ order.first_name }}</li>
-                        <li><strong>Last Name:</strong> {{ order.last_name }}</li>
-                        <li><strong>Your Email Address:</strong> {{ order.email }}</li>
+                        <li><strong>First Name:</strong> {{ order.sender_first_name }}</li>
+                        <li><strong>Last Name:</strong> {{ order.sender_last_name }}</li>
+                        <li><strong>Your Email Address:</strong> {{ order.sender_email }}</li>
                         <li><strong>Your Mobile Number:</strong></li>
                     </ul>
                 </div>
@@ -100,19 +99,14 @@
                     <h2>Delivery</h2>
                     <p class="brdr2"></p>
                     <ul class="yr_detail">
-                        <li><strong>Method:</strong>{% if order.pdf_download == 1 %} Post & Digital Download (PDF){% else %} Post Only{% endif %}</li>
-                        {% for item in cart %}
-                            {% with product=item.product %}
-                        <li><strong>Item:</strong> {{ item.name }} - £{{ item.price }}</li>
-                            {% endwith %}
-                        {% endfor %}
-
+                        <li><strong>Method:</strong>{% if order.pdf_download == 1 %} Post & Digital Download (PDF) - £{{options}}{% else %} Post Only{% endif %}</li>
+                        <li><strong>Item:</strong> {{ order.name }} - £{{ order.price }}</li>
                         <li><strong>Delivery:</strong> FREE</li>
-                        <li><strong>Total:</strong> £{{ cart.get_total_price }}</li>                        
+                        <li><strong>Total:</strong> £{{ total_cost }}</li>                        
                     </ul>
                 </div>
                 <div class="col-sm-12 del_sec2">
-                    <p>Or, if you like to make some changes then <a href="{% url 'orders:order_update' ref=order.ref %}" class="follow">follow the link</a></p>
+                    <p>Or, if you like to make some changes then <a href="{% url 'orders:order_update' order=order.pk %}" class="follow">follow the link</a></p>
                 </div>
                 <div class="col-sm-12 text-left">
                     <a href="{% url 'cart:shopping_cart' %}" class="nxt_stp btn_nxt btn-for-mob">Order Now!</a></p>

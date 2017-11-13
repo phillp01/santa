@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.views.decorators.http import require_POST
+from django.http import HttpResponse
 from shop.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
-from orders.models import Order, OrderItem
+from orders.models import Order, OrderItem, ItemOption
 
 @require_POST
 def cart_add(request, product_id):
@@ -29,15 +30,31 @@ def cart_remove(request, product_id):
 	
 
 def cart_detail(request):
-	cart = Cart(request)
+	cart_total = 0
+	order_id = request.session['order_id']
+	print ("cart_detail order id =", order_id)
+	if OrderItem.objects.filter(order_id=order_id).exists():
+		print("Order Items Found")
+		items = OrderItem.objects.filter(order_id=order_id)
+		
+		for item in items:
+			cart_total += item.price
+			if ItemOption.objects.filter(orderitem_id=item.id).exists():
+				options = get_list_or_404(ItemOption, orderitem_id=item.id)
+				print ("Item Options do exist")
+			
+				for option in options:
+					cart_total += option.price
+					print ("Product = ",option.price)
+				print ("order.cart_detail item.price =",item.price)
+			print ("Items in Cart =", items)
+	else:
+		print("No Order items found")
+		items=''
+	
+	
+	print ("Cart Total =", cart_total)
 
-	for item in cart:
-		if item.get('product') != 4:
-			result = Order.objects.filter(ref=item.get('ref'))
-			item['child_first_name'] = result[0].child_first_name
-
-	#for key, value in request.session.items():
-	#	print('{} => {} => {}'.format(key, value, type(value)))
-
-	#return render(request, 'cart/detail.html', {'cart': cart})
-	return render(request, 'santa/shopping-cart.html', {'cart': cart})
+	# html = "<html><body><h1>Respose</h1></body></html>"
+	# return HttpResponse(html)
+	return render(request, 'santa/shopping-cart.html', {'cart': items,'cart_total':cart_total})

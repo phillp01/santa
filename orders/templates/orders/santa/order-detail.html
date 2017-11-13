@@ -24,7 +24,13 @@
 						<div class="border_dotted">
 							<div class="row">
 								<div class="col-sm-12 form_head">
+									{{form.order.as_hidden}}
 									{{form.ref.as_hidden}}
+									{{form.product.as_hidden}}
+									{{form.quantity.as_hidden}}
+									{{form.price.as_hidden}}
+									{{form.name.as_hidden}}
+
 									<h2>Section 1: Sender Details</h2>
 									<p>Please provide your contact details below and we will keep you up to date at each stage of your letter production.</p>
 									<div class="border_btm"></div>
@@ -33,15 +39,15 @@
 									<div class="col-sm-6">
 										{{ form.subject.errors }}
 										<label>First Name<i class="red">*</i></label>
-										{{ form.first_name }}
+										{{ form.sender_first_name }}
 									</div>
 									<div class="col-sm-6">
 										<label>Last Name<i class="red">*</i></label>
-										{{ form.last_name }}
+										{{ form.sender_last_name }}
 									</div>
 									<div class="col-sm-6">
 										<label>Your Email Address<i class="red">*</i></label>
-										{{ form.email }}
+										{{ form.sender_email }}
 									</div>
 									<div class="col-sm-6">
 										<label>Confirm Email Address<i class="red">*</i></label>

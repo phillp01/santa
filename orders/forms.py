@@ -1,11 +1,24 @@
 from django import forms
-from .models import Order
+from .models import OrderItem, ItemOption
 
-class OrderCreateForm(forms.ModelForm):
+# class OrderCreateForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Order
+# 		fields = ['agree_terms','created'
+# 		]
+
+# 	def __init__(self, *args, **kwargs):
+# 		super(OrderCreateForm, self).__init__(*args, **kwargs)
+		
+# 		for fname, f in self.fields.items():
+# 			f.widget.attrs['class'] = 'txt'
+
+
+class OrderItemCreate(forms.ModelForm):
 	class Meta:
-		model = Order
-		fields = ['ref',
-				'first_name','last_name','email',
+		model = OrderItem
+		fields = ['id','order','product','quantity','price','name',
+				'sender_first_name','sender_last_name','sender_email',
 				'child_first_name','child_last_name', 'child_boy_girl',
 				'child_age','child_age_time','child_birth_year','child_birth_month','child_birth_day',
 				'child_address','child_address2','child_address3',
@@ -17,7 +30,6 @@ class OrderCreateForm(forms.ModelForm):
 		]
 		widgets = {
 					'letter_design' : forms.RadioSelect(),
-					'field_name' : forms.HiddenInput(),
 					#'last_name' : forms.TextInput(attrs={"class": 'txt'}),
 					#'email' : forms.TextInput(attrs={"class": 'txt'}),
 					#'child_first_name' : forms.TextInput(attrs={"class": 'txt'}),
@@ -28,7 +40,7 @@ class OrderCreateForm(forms.ModelForm):
 		}
 
 	def __init__(self, *args, **kwargs):
-		super(OrderCreateForm, self).__init__(*args, **kwargs)
+		super(OrderItemCreate, self).__init__(*args, **kwargs)
 
 		
 		
@@ -43,3 +55,24 @@ class OrderCreateForm(forms.ModelForm):
 		self.fields['pdf_download'].widget.attrs['id'] = 'checkbox-2'
 		self.fields['agree_terms'].widget.attrs['class'] = 'checkbox-custom'
 		self.fields['agree_terms'].widget.attrs['id'] = 'checkbox-3'
+
+		# 	options = ItemOption.objects.get(orderitem_id=self.id)
+		# 	total_price = options.price + self.price
+		# 	self.total_price= total_price
+		# 	return total_price
+		# else:
+		# 	self.total_price = self.price
+		# 	return self.price
+
+
+class OrderOptionsCreate(forms.ModelForm):
+ 
+	class Meta:   #quantity = forms.TypedChoiceField(
+	#                           choices=PRODUCT_QUANTITY_CHOICES,
+	#                          coerce=int)
+		model = ItemOption
+		fields = ['price','quantity','name','orderitem','product'
+		]
+
+	def __init__(self, *args, **kwargs):
+		super(OrderOptionsCreate, self).__init__(*args, **kwargs)
