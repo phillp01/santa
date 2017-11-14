@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3xg8wn=@aip_=0!b85cr0=5#mt)*(-)!8lpvt#@&httcr8g-=%'
+SECRET_KEY =os.getenv('DJANGO_KEY', '3xg8wn=@aip_=0!b85cr0=5#mt)*(-)!8lpvt#@&httcr8g-=%'),
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True'),
 
 ALLOWED_HOSTS = []
 
@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'santa-writes-mysql',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': os.getenv('DATABASE_NAME', 'santa-writes-mysql'),
+        'USER': os.getenv('DATABASE_USER', 'root'),
+        'PASSWORD': os.getenv('DATABASE_PASS', ''),
         'HOST': 'localhost',
         'PORT': '',
     }
