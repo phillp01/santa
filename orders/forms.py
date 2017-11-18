@@ -1,5 +1,5 @@
 from django import forms
-from .models import OrderItem, ItemOption
+from .models import OrderItem, ItemOption, customer
 
 # class OrderCreateForm(forms.ModelForm):
 # 	class Meta:
@@ -76,3 +76,10 @@ class OrderOptionsCreate(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(OrderOptionsCreate, self).__init__(*args, **kwargs)
+
+class CustomerCreate(forms.ModelForm):
+	class Meta:
+		model = customer
+		fields = ['first_name','last_name','email','address','address2','address3',
+					'postal_code','city','country'
+		]

@@ -17,4 +17,8 @@ urlpatterns = [
 	url(r'^removeItem/(?P<item_id>\d+)/$',
 		views.remove_item,
 		name='remove_item'),
+
+	url(r'^checkout/$',
+		views.checkout,
+		name='checkout'),
 ]

@@ -86,7 +86,7 @@
                                     </tr>
                                 {% endif %}
                                 <tr>
-                                    <td colspan="4"><div class="btn_chck"><a href="{% url 'shop:add_recipient' additional='True' %}" class="chckout">Add another recipient</a><a href="{% url 'shop:add_recipient' additional='True' %}" class="chckout">checkout Now</a></div></td>
+                                    <td colspan="4"><div class="btn_chck"><a href="{% url 'shop:add_recipient' additional='True' %}" class="chckout">Add another recipient</a><a href="{% url 'orders:checkout' %}" class="chckout">checkout Now</a></div></td>
                                 </tr>
                             </tbody>
                         </table>

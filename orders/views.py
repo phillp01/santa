@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import OrderItem
-from .forms import OrderItemCreate,OrderOptionsCreate
+from .forms import OrderItemCreate,OrderOptionsCreate,CustomerCreate
 from cart.cart import Cart
 from pprint import pprint
 
@@ -13,6 +13,8 @@ from orders.models import Order, OrderItem, ItemOption
 
 from django.conf import settings
 import random, string
+
+from .tasks import order_created
 
 # @never_cache
 # def order_create(request):
@@ -263,6 +265,16 @@ def remove_item(request, item_id):
 		print("Item to Remove NOT found - nothing needs doing")
 
 	return  redirect('cart:shopping_cart')
+
+def checkout(request):
+
+	order_id = request.session['order_id']
+	customer = CustomerCreate()
+
+	return  render(request,
+						'orders/santa/payment.html',
+						{'customer': customer},
+						)
 
 	# html = "<html><body><h1>RESPONSE!</h1></body></html>"
 	# return HttpResponse(html)

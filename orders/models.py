@@ -113,6 +113,8 @@ class ItemOption(models.Model):
 	name = models.CharField(max_length=200, db_index=True)
 
 class customer(models.Model):
+	order = models.ForeignKey(Order, related_name='customer_order')
+	created = models.DateTimeField(auto_now_add=True)
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	email = models.EmailField()
@@ -123,3 +125,9 @@ class customer(models.Model):
 	city = models.CharField(max_length=100)
 	COUNTRY_CHOICES = (('option 1','UK'),('option 2','USA'),)
 	country = models.CharField(max_length=10, choices=COUNTRY_CHOICES, default='UK')
+    
+	class Meta:
+		ordering = ('-created',)
+
+	def __str__(self):
+		return 'customer {}'.format(self.id)

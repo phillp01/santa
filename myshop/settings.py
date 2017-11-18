@@ -20,12 +20,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =os.getenv('DJANGO_KEY', '3xg8wn=@aip_=0!b85cr0=5#mt)*(-)!8lpvt#@&httcr8g-=%'),
+SECRET_KEY =os.getenv('DJANGO_KEY', ''),
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True'),
 
-ALLOWED_HOSTS = ['santa.powerloop.co.uk','54.37.0.238']
+if os.getenv('DEBUG','TRUE') == 'True':
+    DEBUG = True
+else:
+    DEBUG = False
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '')
 
 
 # Application definition
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'orders',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +142,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 CART_SESSION_ID = 'cart'
 CUSTOMER_SESSION_ID = 'customer'
 ORDER_SESSION_ID = 'order'
+
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_SANTA_PUBLISHABLE', 'pk_test_gSCGMYvyjB8hbCq2QavkK9Ob')
+STRIPE_SECRET = os.getenv('STRIPE_SANTA_SECRET', 'sk_test_5qtcWIuhgQsuEaqfmoBpJKxr')
